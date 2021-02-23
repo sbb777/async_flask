@@ -49,7 +49,7 @@ def randomNumberGenerator():
         number = round(random()*10, 3)
         print(number)
         socketio.emit('newnumber', {'number': number}, namespace='/test')
-        socketio.sleep(5)
+        socketio.sleep(0.05)
 
 
 @app.route('/')
@@ -60,7 +60,7 @@ def index():
 @socketio.on('connect', namespace='/test')
 def test_connect():
     # need visibility of the global thread object
-    global thread
+    global thread # Thread 객체를 전역으로 설정 !!!
     print('Client connected')
 
     #Start the random number generator thread only if the thread has not been started before.
